@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NorthPeak Digital — Strategy, design and growth for brands on the way up</title>
+<meta name="description" content="NorthPeak Digital is a brand, web and growth studio. We take ambitious companies from basecamp to summit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0F1720;
+    --bg-raise: #16212C;
+    --bg-raise-2: #1D2B37;
+    --line: #29394648;
+    --ink: #EDF1F4;
+    --ink-dim: #8FA0AC;
+    --ink-mute: #5F717D;
+    --ice: #7FD4E8;
+    --ice-dim: #7fd4e81a;
+    --amber: #F2A65A;
+    --amber-dim: #f2a65a1a;
+    --radius: 4px;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --max: 1180px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button, input, textarea, select{font-family:inherit; font-size:inherit; color:inherit;}
+
+  :focus-visible{
+    outline: 2px solid var(--ice);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ice);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px;
+    height:1px;
+    background:var(--ice);
+  }
+
+  h1,h2,h3,h4{
+    font-family:var(--display);
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  section{
+    position:relative;
+    padding:96px 0;
+    border-bottom:1px solid var(--line);
+  }
+
+  /* ---------- Contour signature graphic ---------- */
+  .contours{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+  }
+  .contours svg{
+    position:absolute;
+    width:100%;
+    height:100%;
+  }
+  .contour-line{
+    fill:none;
+    stroke:var(--ice);
+    stroke-width:1;
+    opacity:0.16;
+    vector-effect:non-scaling-stroke;
+  }
+  .contour-line.amber{ stroke:var(--amber); opacity:0.14; }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(15,23,32,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 24px;
+    max-width:var(--max);
+    margin:0 auto;
+  }
+  .logo{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:0.01em;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .logo .mark{
+    width:20px; height:20px;
+  }
+  .nav-links{
+    display:flex;
+    gap:32px;
+    font-size:14px;
+    color:var(--ink-dim);
+  }
+  .nav-links a{ transition:color 0.15s ease; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--ice);
+    color:#08141C;
+    font-weight:600;
+    font-size:14px;
+    padding:10px 18px;
+    border-radius:var(--radius);
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .nav-cta:hover{ background:#9CE0EF; transform:translateY(-1px); }
+  .nav-toggle{ display:none; }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    border-radius:var(--radius);
+    font-weight:600;
+    font-size:15px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-primary{
+    background:var(--amber);
+    color:#241305;
+  }
+  .btn-primary:hover{ background:#F7BB7C; transform:translateY(-2px); }
+  .btn-ghost{
+    background:transparent;
+    border-color:var(--line);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{ border-color:var(--ice); color:var(--ice); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-top:130px;
+    padding-bottom:120px;
+  }
+  .hero .wrap{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(40px, 5.6vw, 74px);
+    line-height:1.02;
+    max-width:12ch;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--ice);
+  }
+  .hero-sub{
+    color:var(--ink-dim);
+    font-size:17px;
+    max-width:46ch;
+    margin-top:24px;
+  }
+  .hero-cta{
+    display:flex;
+    gap:14px;
+    margin-top:36px;
+    flex-wrap:wrap;
+  }
+  .hero-elev{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-mute);
+    border-left:1px solid var(--line);
+    padding-left:20px;
+    display:grid;
+    gap:10px;
+  }
+  .hero-elev strong{
+    display:block;
+    font-family:var(--display);
+    font-size:28px;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .hero-elev-row{ display:flex; justify-content:space-between; gap:16px; padding:10px 0; border-top:1px solid var(--line); }
+  .hero-elev-row:first-child{ border-top:none; padding-top:0; }
+
+  /* ---------- Section heads ---------- */
+  .section-head{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:end;
+    gap:24px;
+    margin-bottom:56px;
+  }
+  .section-head h2{
+    font-size:clamp(28px, 3.4vw, 42px);
+    margin-top:14px;
+    max-width:16ch;
+  }
+  .section-head p{
+    color:var(--ink-dim);
+    max-width:38ch;
+    font-size:15px;
+    text-align:right;
+  }
+
+  /* ---------- Services ---------- */
+  .services-grid{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--bg);
+    padding:36px 30px;
+    transition:background 0.2s ease;
+  }
+  .service-card:hover{ background:var(--bg-raise); }
+  .service-icon{
+    width:38px; height:38px;
+    margin-bottom:22px;
+  }
+  .service-card h3{
+    font-size:19px;
+    margin-bottom:10px;
+  }
+  .service-card p{
+    color:var(--ink-dim);
+    font-size:14.5px;
+  }
+
+  /* ---------- Results / testimonials ---------- */
+  .stats-bar{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-bottom:64px;
+  }
+  .stat{
+    background:var(--bg);
+    padding:28px 24px;
+  }
+  .stat strong{
+    display:block;
+    font-family:var(--mono);
+    font-size:clamp(26px,3vw,36px);
+    color:var(--ice);
+    font-weight:500;
+  }
+  .stat span{
+    display:block;
+    color:var(--ink-mute);
+    font-size:13px;
+    margin-top:8px;
+  }
+  .testimonials{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .t-card{
+    background:var(--bg-raise);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  .t-quote{ font-size:15.5px; color:var(--ink); }
+  .t-who{ display:flex; align-items:center; gap:12px; margin-top:auto; }
+  .t-avatar{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:var(--bg-raise-2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ice);
+    border:1px solid var(--line);
+  }
+  .t-name{ font-size:13.5px; font-weight:600; }
+  .t-role{ font-size:12.5px; color:var(--ink-mute); }
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+    position:relative;
+    z-index:1;
+  }
+  .tier{
+    background:var(--bg-raise);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:36px 30px;
+    display:flex;
+    flex-direction:column;
+  }
+  .tier.featured{
+    border-color:var(--ice);
+    background:linear-gradient(180deg, #16212C 0%, #16212c 60%, #17242c 100%);
+    box-shadow:0 0 0 1px var(--ice), 0 24px 48px -24px #7fd4e840;
+    transform:translateY(-8px);
+  }
+  .tier-label{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--amber);
+  }
+  .tier.featured .tier-label{ color:var(--ice); }
+  .tier-name{
+    font-family:var(--display);
+    font-size:24px;
+    margin-top:10px;
+  }
+  .tier-desc{
+    color:var(--ink-dim);
+    font-size:14px;
+    margin-top:8px;
+  }
+  .tier-price{
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+    margin-top:24px;
+  }
+  .tier-price strong{
+    font-family:var(--display);
+    font-size:40px;
+    font-weight:600;
+  }
+  .tier-price span{
+    color:var(--ink-mute);
+    font-size:13.5px;
+  }
+  .tier-features{
+    margin-top:26px;
+    display:grid;
+    gap:13px;
+    flex-grow:1;
+  }
+  .tier-features li{
+    font-size:14px;
+    color:var(--ink-dim);
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .tier-features li svg{ flex-shrink:0; margin-top:3px; }
+  .tier .btn{ margin-top:30px; justify-content:center; width:100%; }
+
+  /* ---------- Contact ---------- */
+  .contact-inner{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:64px;
+  }
+  .contact-info h2{
+    font-size:clamp(28px, 3.4vw, 40px);
+    margin-top:14px;
+  }
+  .contact-info p{
+    color:var(--ink-dim);
+    margin-top:18px;
+    max-width:40ch;
+    font-size:15px;
+  }
+  .contact-detail{
+    margin-top:36px;
+    display:grid;
+    gap:16px;
+    font-family:var(--mono);
+    font-size:13.5px;
+  }
+  .contact-detail div{
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid var(--line);
+    padding-top:14px;
+    color:var(--ink-dim);
+  }
+  .contact-detail div span:last-child{ color:var(--ink); }
+
+  form{
+    background:var(--bg-raise);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:36px;
+  }
+  .form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .field{
+    margin-bottom:20px;
+    position:relative;
+  }
+  .field label{
+    display:block;
+    font-size:12.5px;
+    font-family:var(--mono);
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--ink-mute);
+    margin-bottom:8px;
+  }
+  .field input,
+  .field select,
+  .field textarea{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:12px 14px;
+    color:var(--ink);
+    transition:border-color 0.15s ease;
+  }
+  .field textarea{ resize:vertical; min-height:100px; }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus{
+    outline:none;
+    border-color:var(--ice);
+  }
+  .field.error input,
+  .field.error select,
+  .field.error textarea{
+    border-color:#E36868;
+  }
+  .field-error{
+    display:none;
+    color:#E36868;
+    font-size:12.5px;
+    margin-top:6px;
+    font-family:var(--mono);
+  }
+  .field.error .field-error{ display:block; }
+  .field-hint{
+    color:var(--ink-mute);
+    font-size:12px;
+    margin-top:6px;
+  }
+  .form-status{
+    display:none;
+    padding:14px 16px;
+    border-radius:var(--radius);
+    font-size:14px;
+    margin-bottom:20px;
+    font-family:var(--mono);
+  }
+  .form-status.show{ display:block; }
+  .form-status.success{ background:#1FBF7514; border:1px solid #1FBF7550; color:#5FE3AA; }
+  .form-status.fail{ background:#E3686814; border:1px solid #E3686850; color:#F09A9A; }
+  form .btn-primary{ width:100%; justify-content:center; margin-top:6px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:56px 0 32px;
+  }
+  .footer-top{
+    display:grid;
+    grid-template-columns:1.3fr repeat(3, 1fr);
+    gap:40px;
+    padding-bottom:48px;
+    border-bottom:1px solid var(--line);
+  }
+  .footer-brand p{
+    color:var(--ink-dim);
+    font-size:14px;
+    margin-top:14px;
+    max-width:32ch;
+  }
+  .footer-col h4{
+    font-size:12.5px;
+    font-family:var(--mono);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-mute);
+    margin-bottom:16px;
+  }
+  .footer-col ul{ display:grid; gap:11px; }
+  .footer-col a{
+    color:var(--ink-dim);
+    font-size:14px;
+    transition:color 0.15s ease;
+  }
+  .footer-col a:hover{ color:var(--ice); }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding-top:24px;
+    font-size:13px;
+    color:var(--ink-mute);
+  }
+  .footer-credit a{
+    color:var(--ink-dim);
+    border-bottom:1px solid var(--line);
+    transition:color 0.15s ease, border-color 0.15s ease;
+  }
+  .footer-credit a:hover{ color:var(--ice); border-color:var(--ice); }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:1024px){
+    .hero .wrap{ grid-template-columns:1fr; }
+    .hero-elev{ border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:24px; display:grid; grid-template-columns:repeat(3,1fr); gap:0 20px; }
+    .hero-elev-row{ flex-direction:column; gap:4px; border-top:none; border-left:1px solid var(--line); padding-left:16px; padding-top:0; }
+    .hero-elev-row:first-child{ border-left:none; padding-left:0; }
+    .services-grid{ grid-template-columns:repeat(2, 1fr); }
+    .stats-bar{ grid-template-columns:repeat(2,1fr); }
+    .testimonials{ grid-template-columns:1fr; }
+    .pricing-grid{ grid-template-columns:1fr; max-width:460px; margin:0 auto; }
+    .tier.featured{ transform:none; }
+    .contact-inner{ grid-template-columns:1fr; }
+    .footer-top{ grid-template-columns:1fr 1fr; }
+  }
+
+  @media (max-width:720px){
+    section{ padding:64px 0; }
+    .hero{ padding-top:104px; padding-bottom:72px; }
+    .nav-links{ display:none; }
+    .section-head{ grid-template-columns:1fr; }
+    .section-head p{ text-align:left; }
+    .services-grid{ grid-template-columns:1fr; }
+    .stats-bar{ grid-template-columns:1fr 1fr; }
+    .form-row{ grid-template-columns:1fr; }
+    .footer-top{ grid-template-columns:1fr; gap:32px; }
+    .footer-bottom{ flex-direction:column; align-items:flex-start; }
+    .hero-elev{ grid-template-columns:1fr; gap:14px; }
+    .hero-elev-row{ border-left:none !important; padding-left:0 !important; border-top:1px solid var(--line) !important; padding-top:14px !important; }
+    .hero-elev-row:first-child{ border-top:none !important; padding-top:0 !important; }
+  }
+
+  @media (max-width:400px){
+    .wrap{ padding:0 18px; }
+    .hero h1{ max-width:none; }
+    .nav-cta span.long{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="logo">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M2 19L9 6L13 13L16 8L22 19H2Z" stroke="#7FD4E8" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      NorthPeak
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#results">Results</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta"><span class="long">Start a project</span><span class="short" style="display:none">Start</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="contours" aria-hidden="true">
+      <svg viewBox="0 0 1180 620" preserveAspectRatio="none">
+        <path class="contour-line" d="M-20,520 C150,470 260,560 420,500 C580,440 650,520 820,470 C960,430 1050,480 1200,440" />
+        <path class="contour-line" d="M-20,560 C160,510 300,600 460,540 C620,480 700,560 860,510 C1000,470 1080,520 1200,480" />
+        <path class="contour-line amber" d="M-20,600 C180,550 340,630 500,570 C660,510 740,590 900,540 C1030,500 1100,550 1200,520" />
+        <path class="contour-line" d="M-20,480 C140,430 240,510 400,450 C560,390 630,460 800,410 C940,370 1030,420 1200,390" />
+      </svg>
+    </div>
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">NorthPeak Digital — Brand · Web · Growth</p>
+        <h1>Reach the <em>summit</em> of your market.</h1>
+        <p class="hero-sub">We plan the route, build the gear and guide ambitious teams from an idea at basecamp to a brand that owns the ridge line. Strategy, design and engineering under one roof.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">
+            Start the climb
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="#241305" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#results" class="btn btn-ghost">See the results</a>
+        </div>
+      </div>
+      <div class="hero-elev">
+        <div class="hero-elev-row"><span>Client retention<strong>93%</strong></span></div>
+        <div class="hero-elev-row"><span>Avg. organic lift<strong>4.2×</strong></span></div>
+        <div class="hero-elev-row"><span>Projects shipped<strong>140+</strong></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">What we do</p>
+          <h2>Six disciplines, one straight line to your goal.</h2>
+        </div>
+        <p>Every engagement pulls from the same core team, so strategy, design and code never lose the thread.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="services-grid">
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none"><path d="M6 32L16 12L22 22L27 15L34 32H6Z" stroke="#7FD4E8" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <h3>Brand Strategy</h3>
+          <p>Positioning, naming and narrative that give a company a reason to be remembered, not just recognized.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none"><rect x="6" y="9" width="28" height="22" rx="2" stroke="#7FD4E8" stroke-width="1.4"/><path d="M6 15H34" stroke="#7FD4E8" stroke-width="1.4"/><circle cx="10.5" cy="12" r="1" fill="#7FD4E8"/></svg>
+          <h3>Web Design &amp; Dev</h3>
+          <p>Hand-coded, fast-loading sites built on semantic markup — no page builders, no bloat, no excuses.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none"><path d="M8 30V18M18 30V10M28 30V22" stroke="#7FD4E8" stroke-width="1.4" stroke-linecap="round"/><path d="M6 30H34" stroke="#7FD4E8" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <h3>SEO &amp; Growth</h3>
+          <p>Technical SEO, content architecture and paid channels tuned to compound rather than plateau.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none"><path d="M8 12H32M8 20H32M8 28H24" stroke="#7FD4E8" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <h3>Content &amp; Copy</h3>
+          <p>Copy that sounds like a person talking to a person — on the page, in the inbox, in the deck.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="13" stroke="#7FD4E8" stroke-width="1.4"/><path d="M20 7V20L28 25" stroke="#7FD4E8" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <h3>Paid Media</h3>
+          <p>Search, social and programmatic spend managed against payback period, not vanity impressions.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none"><rect x="8" y="8" width="11" height="11" rx="1.5" stroke="#7FD4E8" stroke-width="1.4"/><rect x="21" y="8" width="11" height="11" rx="1.5" stroke="#7FD4E8" stroke-width="1.4"/><rect x="8" y="21" width="24" height="11" rx="1.5" stroke="#7FD4E8" stroke-width="1.4"/></svg>
+          <h3>Product Design</h3>
+          <p>UX research and interface design for the software teams building behind the marketing site.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS / TESTIMONIALS -->
+  <section id="results">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Field notes</p>
+          <h2>Numbers from the last twelve months on the mountain.</h2>
+        </div>
+        <p>A small sample of the teams we've helped move faster, and what they said about the climb.</p>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat"><strong>140+</strong><span>Projects shipped since 2019</span></div>
+        <div class="stat"><strong>4.2×</strong><span>Average organic traffic lift</span></div>
+        <div class="stat"><strong>93%</strong><span>Client retention rate</span></div>
+        <div class="stat"><strong>18d</strong><span>Average time to first draft</span></div>
+      </div>
+
+      <div class="testimonials">
+        <div class="t-card">
+          <p class="t-quote">"NorthPeak rebuilt our site in three weeks and our demo requests doubled the following month. They actually shipped, which is rarer than it should be."</p>
+          <div class="t-who">
+            <div class="t-avatar">RL</div>
+            <div><p class="t-name">Rosa Linden</p><p class="t-role">VP Marketing, Fennwick</p></div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-quote">"The strategy work upfront saved us from a rebrand we would have regretted. They pushed back on our first idea, and they were right to."</p>
+          <div class="t-who">
+            <div class="t-avatar">DK</div>
+            <div><p class="t-name">Daniel Kwon</p><p class="t-role">Founder, Loft &amp; Ledger</p></div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-quote">"Six months in and our organic pipeline has replaced half our paid spend. Communication was tight the entire way through."</p>
+          <div class="t-who">
+            <div class="t-avatar">AM</div>
+            <div><p class="t-name">Amara Osei</p><p class="t-role">Head of Growth, Ridgeline Health</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="contours" aria-hidden="true">
+      <svg viewBox="0 0 1180 400" preserveAspectRatio="none">
+        <path class="contour-line" d="M-20,60 C150,20 260,90 420,40 C580,-10 650,60 820,20 C960,-10 1050,30 1200,0" />
+        <path class="contour-line amber" d="M-20,100 C160,60 300,130 460,80 C620,30 700,100 860,60 C1000,30 1080,70 1200,50" />
+      </svg>
+    </div>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Pricing</p>
+          <h2>Three routes up, priced by how much rope you need.</h2>
+        </div>
+        <p>Monthly retainers, no lock-in past the first quarter. Custom scopes available for larger expeditions.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="tier">
+          <p class="tier-label">Route 01</p>
+          <h3 class="tier-name">Basecamp</h3>
+          <p class="tier-desc">For early-stage teams that need a credible site and a clear story, fast.</p>
+          <div class="tier-price"><strong>$2,400</strong><span>/ month</span></div>
+          <ul class="tier-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>5-page marketing site</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Brand positioning doc</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Monthly reporting call</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Email support</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Choose Basecamp</a>
+        </div>
+
+        <div class="tier featured">
+          <p class="tier-label">Route 02 — Most chosen</p>
+          <h3 class="tier-name">Ridge</h3>
+          <p class="tier-desc">For growing teams ready to invest in design, content and search together.</p>
+          <div class="tier-price"><strong>$5,800</strong><span>/ month</span></div>
+          <ul class="tier-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Full site design + build</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>SEO &amp; content roadmap</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>2 campaign builds / quarter</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Weekly working session</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority Slack support</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Choose Ridge</a>
+        </div>
+
+        <div class="tier">
+          <p class="tier-label">Route 03</p>
+          <h3 class="tier-name">Summit</h3>
+          <p class="tier-desc">Full-stack partner for teams that treat marketing as a product surface.</p>
+          <div class="tier-price"><strong>$11,000</strong><span>/ month</span></div>
+          <ul class="tier-features">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated pod (5 disciplines)</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Product design capacity</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Paid media management</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="#7FD4E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Same-day response SLA</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Choose Summit</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-inner">
+        <div class="contact-info">
+          <p class="eyebrow">Get in touch</p>
+          <h2>Tell us where you're trying to get to.</h2>
+          <p>Send a few details about the project and we'll reply within one business day with next steps, or a straight answer if we're not the right fit.</p>
+          <div class="contact-detail">
+            <div><span>Email</span><span>climb@northpeakdigital.co</span></div>
+            <div><span>Phone</span><span>+1 (555) 014-2290</span></div>
+            <div><span>Studio</span><span>Denver, CO</span></div>
+            <div><span>Hours</span><span>Mon–Fri, 9–6 MT</span></div>
+          </div>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="form-status" id="form-status" role="status"></div>
+
+          <div class="form-row">
+            <div class="field" id="field-name">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+              <p class="field-error">Enter your full name.</p>
+            </div>
+            <div class="field" id="field-email">
+              <label for="email">Work email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+              <p class="field-error">Enter a valid email address.</p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field" id="field-company">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" autocomplete="organization">
+              <p class="field-hint">Optional</p>
+            </div>
+            <div class="field" id="field-budget">
+              <label for="budget">Monthly budget</label>
+              <select id="budget" name="budget" required>
+                <option value="" disabled selected>Select a range</option>
+                <option value="basecamp">Under $3,000 — Basecamp</option>
+                <option value="ridge">$3,000–$8,000 — Ridge</option>
+                <option value="summit">$8,000+ — Summit</option>
+                <option value="unsure">Not sure yet</option>
+              </select>
+              <p class="field-error">Select a budget range.</p>
+            </div>
+          </div>
+
+          <div class="field" id="field-message">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" required minlength="20" placeholder="What are you trying to build, and by when?"></textarea>
+            <p class="field-error">Give us at least a couple of sentences (20+ characters).</p>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Send it up the mountain
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="#241305" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M2 19L9 6L13 13L16 8L22 19H2Z" stroke="#7FD4E8" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          NorthPeak
+        </a>
+        <p>A brand, web and growth studio for companies on the way up. Based in Denver, working everywhere.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#top">Careers</a></li>
+          <li><a href="#top">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#top">Privacy</a></li>
+          <li><a href="#top">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NorthPeak Digital. All rights reserved.</span>
+      <span class="footer-credit">Built for <a href="https://digitalheroesco.com" target="_blank" rel="noopener">Digital Heroes Training Task</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- Client-side form validation (no libraries) ----
+  (function(){
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    const validators = {
+      name: v => v.trim().length >= 2,
+      email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+      budget: v => v.trim().length > 0,
+      message: v => v.trim().length >= 20
+    };
+
+    function setFieldState(fieldId, valid){
+      const field = document.getElementById(fieldId);
+      if(!field) return;
+      field.classList.toggle('error', !valid);
+    }
+
+    function validateField(input){
+      const rule = validators[input.name];
+      if(!rule) return true;
+      const valid = rule(input.value);
+      setFieldState('field-' + input.name, valid);
+      return valid;
+    }
+
+    ['name','email','budget','message'].forEach(function(n){
+      const el = form.elements[n];
+      if(!el) return;
+      const evt = (el.tagName === 'SELECT') ? 'change' : 'input';
+      el.addEventListener(evt, function(){ validateField(el); });
+      el.addEventListener('blur', function(){ validateField(el); });
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      let allValid = true;
+
+      ['name','email','budget','message'].forEach(function(n){
+        const el = form.elements[n];
+        if(!el) return;
+        const ok = validateField(el);
+        if(!ok) allValid = false;
+      });
+
+      status.classList.remove('show','success','fail');
+
+      if(!allValid){
+        status.textContent = 'A couple of fields need a second look before this can climb any higher.';
+        status.classList.add('show','fail');
+        const firstError = form.querySelector('.field.error input, .field.error select, .field.error textarea');
+        if(firstError) firstError.focus();
+        return;
+      }
+
+      // No backend wired up — simulate a successful hand-off.
+      status.textContent = 'Sent. We reply to every basecamp within one business day.';
+      status.classList.add('show','success');
+      form.reset();
+      document.querySelectorAll('.field.error').forEach(f => f.classList.remove('error'));
+    });
+  })();
+
+  // ---- Mobile nav CTA label swap below 400px ----
+  (function(){
+    function updateCtaLabel(){
+      const long = document.querySelector('.nav-cta .long');
+      const short = document.querySelector('.nav-cta .short');
+      if(!long || !short) return;
+      const isNarrow = window.innerWidth <= 400;
+      long.style.display = isNarrow ? 'none' : 'inline';
+      short.style.display = isNarrow ? 'inline' : 'none';
+    }
+    updateCtaLabel();
+    window.addEventListener('resize', updateCtaLabel);
+  })();
+</script>
+
+</body>
+</html>
